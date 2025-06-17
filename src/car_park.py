@@ -1,3 +1,4 @@
+from time import CLOCK_REALTIME
 from display import Display
 from sensor import Sensor
 
@@ -9,6 +10,10 @@ class CarPark:
         self.capacity = capacity
         self.plates = _plates or []
         self.sensors = _sensors or []
+
+    @property
+    def available_bays(self):
+        return max(0, self.capacity - len(self.plates))
 
     def register(self, component):
         if not isinstance(component, (Sensor, Display)):
@@ -31,7 +36,9 @@ class CarPark:
         # TODO: What if the plate isn't there?
 
     def update_displays(self):
-        ...
+        data = {"Available Bays": self.available_bays, "Current Temperature": 41, "Current Time": CLOCK_REALTIME}
+        for display in self.displays:
+            display.update(data)
 
     def __str__(self):
         return f"{self.location} Car Park - {self.capacity - len(self.plates)} bays available"
