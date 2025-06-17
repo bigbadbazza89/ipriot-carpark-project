@@ -18,12 +18,17 @@ class CarPark:
         elif isinstance(component, Display):
             self.displays.append(component)
 
-
     def add_car(self, plate: str):
-        ...
+        if plate not in self.plates:
+            self.plates.append(plate)
+        self.update_displays()
+        # TODO: What do i do if plate already in the list?
 
     def remove_car(self, plate: str):
-        ...
+        if plate in self.plates:
+            self.plates.remove(plate)
+        self.update_displays()
+        # TODO: What if the plate isn't there?
 
     def update_displays(self):
         ...
