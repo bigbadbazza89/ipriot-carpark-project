@@ -27,13 +27,11 @@ class CarPark:
         if plate not in self.plates:
             self.plates.append(plate)
         self.update_displays()
-        # TODO: What do i do if plate already in the list?
 
     def remove_car(self, plate: str):
         if plate in self.plates:
             self.plates.remove(plate)
         self.update_displays()
-        # TODO: What if the plate isn't there?
 
     def update_displays(self):
         data = {"Available Bays": self.available_bays, "Current Temperature": 41, "Current Time": CLOCK_REALTIME}
