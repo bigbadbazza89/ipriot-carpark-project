@@ -5,7 +5,7 @@ from abc import ABC, abstractmethod
 import random
 
 class Sensor(ABC):
-    def __init__(self, sensor_id: str, car_park: CarPark, is_active: bool):
+    def __init__(self, sensor_id: int, car_park: CarPark, is_active: bool):
         self.id = sensor_id
         self.is_active = is_active
         self.car_park = car_park
