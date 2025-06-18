@@ -1,5 +1,7 @@
 import unittest
 from car_park import CarPark
+from sensor import EntrySensor
+from display import Display
 
 class TestCarPark(unittest.TestCase):
       def setUp(self):
@@ -39,6 +41,15 @@ class TestCarPark(unittest.TestCase):
       def test_removing_a_car_that_does_not_exist(self):
          with self.assertRaises(ValueError):
             self.car_park.remove_car("NO-1")
+
+      def test_register_display_succeeds(self):
+          self.car_park.register(Display(12, "Have a great day!"))
+          self.assertTrue(self.car_park.displays)
+
+      def test_register_sensor_fails(self):
+          with self.assertRaises(TypeError):
+              self.car_park.register(EntrySensor(15, self.car_park, True))
+
 
 
 if __name__ == "__main__":
