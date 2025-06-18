@@ -1,10 +1,8 @@
-from car_park import CarPark
 class Display:
-    def __init__(self, display_id: int, message: str, car_park: CarPark, is_on=True):
+    def __init__(self, display_id: int, message: str, is_on=True):
         self.id = display_id
         self.message = message
         self.is_on = is_on
-        self.car_park = car_park
 
     def update(self, data: dict):
         for key, value in data.items():
