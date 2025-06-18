@@ -2,7 +2,6 @@ from datetime import datetime
 from display import Display
 
 class CarPark:
-    displays: list[Display]
     def __init__(self, location, capacity, _plates=None, _displays=None):
         self.location = location
         self.displays = _displays or []
