@@ -1,4 +1,4 @@
-from time import CLOCK_REALTIME
+from datetime import datetime
 from display import Display
 
 class CarPark:
@@ -32,7 +32,8 @@ class CarPark:
         self.update_displays()
 
     def update_displays(self):
-        data = {"Available Bays": self.available_bays, "Current Temperature": 41, "Current Time": CLOCK_REALTIME}
+        current_datetime = datetime.now()
+        data = {"Available Bays": self.available_bays, "Current Temperature": 41, "Current Time": current_datetime}
         for display in self.displays:
             display.update(data)
 
