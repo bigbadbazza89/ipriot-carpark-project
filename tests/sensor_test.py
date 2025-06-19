@@ -1,4 +1,5 @@
 import unittest
+import re
 from sensor import EntrySensor
 from car_park import CarPark
 
@@ -16,8 +17,10 @@ class TestEntrySensor(unittest.TestCase):
     def test_detect_vehicle(self):
         initial_bays = self.entry_sensor.car_park.available_bays
         self.entry_sensor.detect_vehicle()
+        plate = self.entry_sensor.car_park.plates[-1]
         updated_bays = self.entry_sensor.car_park.available_bays
         self.assertEqual(updated_bays, initial_bays - 1)
+        self.assertRegex(plate, r"^FAKE-\d{3}$")
 
 
 if __name__ == '__main__':
