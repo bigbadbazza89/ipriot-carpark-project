@@ -391,13 +391,16 @@ For example, you may want to see the number of available bays, the current tempe
 Now consider, between the `CarPark`, `Sensor`, and `Display` classes, which class is responsible for each piece of information? There's no right or wrong answer here. But you should be able to justify your answer.
 
 >Q. Which class is responsible for the number of available bays (and why)?
-> The CarPark class. As it holds the list of total number of plates in the car park, it is easier to return a value here that calculates the total number of available bays.
+> 
+> The CarPark class. As it holds the list of total number of plates in the car park, it maintains the state of the car park as a complete entity. As the principle class, it can use this information to interact with the other classes.
 > 
 >Q. Which class is responsible for the current temperature (and why)?
->
+> 
+> The Sensor makes the most sense as it's role is to detect changes and then notify the CarPark. As new temp information is brought in by the Sensor, it can update the CarPark, which in turn can call the Display to update when a new car enters or exits.
 > 
 >Q. Which class is responsible for the time (and why)?
 >
+> The CarPark class would make the most sense here as it can update the displays with the time when a car enters or exits, making it more efficient than a Display constantly calling the CarPark for updates (polling). 
 --------
 
 ##### 2.7.3.1. Detour: implement available bays
@@ -479,17 +482,17 @@ Answer the following questions:
 >
 > 1. **Which class is responsible for each of the following pieces of information (and why)?**
 >    - *The number of available bays*
->      `Answer here...`
+>      `Answered above.
 >    - *The current temperature*
->      `Answer here...`
+>      `Answered above.
 >    - *The time*
->      `Answer here...`
+>      `Answered above.
 >
 > 2. **What is the difference between an attribute and a property?**
->    `Answer here...`
+>    `Attributes are just simple variables created on an instance of an object, whereas properties are variables that can be controlled by methods.
 >
 > 3. **Why do you think we used a dictionary to hold the data we passed the display? List at least one advantage and one disadvantage of this approach.**
->    `Answer here...`
+>    `It makes the data variable more compact and efficient as it can pass multiple items together and can also have new items added due to dictionaries being mutable.
 
 #### 2.7.5. Add a detect vehicle method to the Sensor class
 
