@@ -1,12 +1,16 @@
+from pathlib import Path
 from datetime import datetime
 from display import Display
 
+
 class CarPark:
-    def __init__(self, location, capacity, _plates=None, _displays=None):
+    def __init__(self, location, capacity, _plates=None, _displays=None, log_file=Path("log.txt")):
         self.location = location
         self.displays = _displays or []
         self.capacity = capacity
         self.plates = _plates or []
+        self.log_file = log_file if isinstance(log_file, Path) else Path(log_file)
+        self.log_file.touch(exist_ok=True)
 
     @property
     def available_bays(self):
@@ -22,6 +26,7 @@ class CarPark:
         if plate not in self.plates:
             self.plates.append(plate)
         self.update_displays()
+        self._log_car_activity(plate, "entered")
 
     def remove_car(self, plate: str):
         if plate in self.plates:
@@ -29,12 +34,17 @@ class CarPark:
         else:
             raise(ValueError)
         self.update_displays()
+        self._log_car_activity(plate, "exited")
 
     def update_displays(self):
         current_datetime = datetime.now()
         data = {"Available Bays": self.available_bays, "Current Temperature": 41, "Current Time": current_datetime}
         for display in self.displays:
             display.update(data)
+
+    def _log_car_activity(self, plate, action):
+        with self.log_file.open("a") as f:
+            f.write(f"{plate} {action} at {datetime.now():%Y-%m-%d %H:%M:%S}\n")
 
     def __str__(self):
         return f"{self.location} Car Park - {self.capacity - len(self.plates)} bays available"
