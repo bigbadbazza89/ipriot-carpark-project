@@ -1,4 +1,5 @@
 import unittest
+import json
 from pathlib import Path
 from car_park import CarPark
 from sensor import EntrySensor
@@ -80,6 +81,20 @@ class TestCarPark(unittest.TestCase):
           self.assertIn("exited", last_line)  # check description
           self.assertIn("\n", last_line)  # check entry has a new line
 
+      def test_write_config_in_json(self):
+          config_path = Path("testing_config.json")
+          self.car_park.config_file = config_path
+          self.car_park.write_config()
+          self.assertTrue(config_path.exists())
+
+          with config_path.open() as f:
+              config_data = json.load(f)
+
+          self.assertEqual(config_data["location"], "123 Example Street")
+          self.assertEqual(config_data["capacity"], 100)
+          self.assertEqual(config_data["log_file"], str(self.test_log_file))
+
+          config_path.unlink(missing_ok=True)
 
 
 if __name__ == "__main__":
