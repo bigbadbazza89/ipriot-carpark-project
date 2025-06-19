@@ -7,10 +7,11 @@ import time
 import sys
 
 class Sensor(ABC):
-    def __init__(self, sensor_id: int, car_park: CarPark, is_active: bool):
+    def __init__(self, sensor_id: int, car_park: CarPark, is_active: bool, temp=42.7):
         self.id = sensor_id
         self.is_active = is_active
         self.car_park = car_park
+        self.car_park.set_temperature(f"{temp}C")
 
     def _scan_plate(self):
         return f"FAKE-{random.randint(0, 999):03d}"

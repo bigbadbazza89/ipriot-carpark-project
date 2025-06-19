@@ -9,10 +9,17 @@ class CarPark:
         self.location = location
         self.displays = _displays or []
         self.capacity = capacity
+        self.temperature = None
         self.plates = _plates or []
         self.log_file = log_file if isinstance(log_file, Path) else Path(log_file)
         self.config_file = Path(config_file) if not isinstance(config_file, Path) else config_file
         self.log_file.touch(exist_ok=True)
+
+    def set_temperature(self, temp):
+        self.temperature = temp
+
+    def get_temperature(self):
+        return self.temperature
 
     @property
     def available_bays(self):
@@ -47,7 +54,7 @@ class CarPark:
 
     def update_displays(self):
         current_datetime = datetime.now().replace(microsecond=0)
-        data = {"Available Bays": self.available_bays, "Temperature": 41.2, "Time": current_datetime}
+        data = {"Available Bays": self.available_bays, "Temperature": self.temperature, "Time": current_datetime}
         for display in self.displays:
             display.update(data)
 
