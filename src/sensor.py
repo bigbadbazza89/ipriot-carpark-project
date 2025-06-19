@@ -30,14 +30,14 @@ class Sensor(ABC):
 
 class EntrySensor(Sensor):
     def update_car_park(self, plate):
-        print(f"Inbound Vehicle Detected. Plate: {plate}", end='', flush=True)
+        print(f"Inbound Vehicle: {plate}", end='', flush=True)
         time.sleep(2)
         sys.stdout.write('\r' + ' ' * 50 + '\r')
         self.car_park.add_car(plate)
 
 class ExitSensor(Sensor):
     def update_car_park(self, plate):
-        print(f"Outbound Vehicle Detected. Plate: {plate}", end='', flush=True)
+        print(f"Outbound Vehicle: {plate}", end='', flush=True)
         time.sleep(2)
         sys.stdout.write('\r' + ' ' * 50 + '\r')
         self.car_park.remove_car(plate)
