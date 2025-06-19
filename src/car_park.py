@@ -46,14 +46,14 @@ class CarPark:
         self._log_car_activity(plate, "exited")
 
     def update_displays(self):
-        current_datetime = datetime.now()
-        data = {"Available Bays": self.available_bays, "Current Temperature": 41, "Current Time": current_datetime}
+        current_datetime = datetime.now().replace(microsecond=0)
+        data = {"Available Bays": self.available_bays, "Temperature": 41.2, "Time": current_datetime}
         for display in self.displays:
             display.update(data)
 
     def _log_car_activity(self, plate, action):
         with self.log_file.open("a") as f:
-            f.write(f"{plate} {action} at {datetime.now()}\n")
+            f.write(f"{plate} {action} at {datetime.now():%Y-%m-%d %H:%M:%S}\n")
 
     def write_config(self):
         with self.config_file.open("w") as f:
