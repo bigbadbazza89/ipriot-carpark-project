@@ -1,15 +1,13 @@
-# North Metro Software Python Project Template
+# Car park Project requested by City of Moondalup.
 
-A Python project template for all new projects in North Metro Software
+**Brief**
 
-You may use the guidelines under `org/` for assessments and projects in the IP4RIoT cluster.
+Here is a system designed with OOP processes to simulate a car park display sign that regularly updates, tracks and
+shows real-time information suitable for an open-gate, public car park.
 
-## Additional Examples
-Here are other good examples of onboarding documents that relate to git and version control for you to browse:
+**Features**
 
-- [skybase](https://handbook.skybase.com.np/git-conventions/)
-- [thoughtbot](https://github.com/thoughtbot/guides/tree/main/git) (also see their excellent [code review](https://github.com/thoughtbot/guides/tree/main/code-review) guide!)
-- [GitLab Handbook](https://handbook.gitlab.com/handbook/product-development-flow/)
-
-# Note
-When using this repo as a template, you should update this readme to provide a general overview suitable for **YOUR** project.
+- Entry and Exit detection with sensors.
+- Car park state information storage.
+- Multiple display capabilities with real-time updates.
+- Data logging to store configurations in json friendly file output.
